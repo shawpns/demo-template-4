@@ -48,20 +48,19 @@ jQuery(document).ready(function($){
 
 /************** Google Map *********************/
 
-function loadScript() {
-  var script = document.createElement('script');
-  script.type = 'text/javascript';
-  script.src = 'https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&' +
-      'callback=initialize';
-  document.body.appendChild(script);
-}
+let map;
 
-function initialize() {
-    var mapOptions = {
-      zoom: 14,
-      center: new google.maps.LatLng(12.9716° N, 77.5946° E)
-    };
-    var map = new google.maps.Map(document.getElementById('templatemo_map'),  mapOptions);
+function initMap() {
+  const localContextMapView = new google.maps.localContext.LocalContextMapView({
+    element: document.getElementById("map"),
+    placeTypePreferences: ["restaurant", "tourist_attraction"],
+    maxPlaceCount: 12,
+  });
+  map = localContextMapView.map;
+  map.setOptions({
+    center: { lat: 12.9716, lng: 77.5946 },
+    zoom: 14,
+  });
 }
 
 /************** Pagination *********************/
